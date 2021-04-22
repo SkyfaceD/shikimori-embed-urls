@@ -3,13 +3,12 @@ import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
 /**
- * Simple workaround.
- * Connect to passed [stringUrl] and return new url if redirect found.
+ * Connect to passed [stringUrl] and return valid url if redirect found.
  *
  * @return
- * old url if [stringUrl] host not sibnet.ru or if status code [HttpURLConnection.HTTP_OK],
+ * entry url if [stringUrl] host not sibnet.ru or if status code [HttpURLConnection.HTTP_OK],
  * null if location header not found or status code not [HttpURLConnection.HTTP_MOVED_TEMP],
- * new url otherwise
+ * valid url otherwise
  */
 @Suppress("UsePropertyAccessSyntax", "UnnecessaryVariable")
 fun handleSibnetRedirect(stringUrl: String): String? {

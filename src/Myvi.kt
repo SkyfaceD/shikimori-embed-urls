@@ -9,12 +9,12 @@ import java.net.URLDecoder
 import javax.net.ssl.HttpsURLConnection
 
 /**
- * Simple workaround.
- * Read html from passed [stringUrl] and extract stream url.
+ * Read html from passed [stringUrl], extract stream url and return valid url if redirect found.
+ * Works with myvi.tv and myvi.top
  *
  * @return
- * old url if [stringUrl] host not myvi.tv or if status code not [HttpURLConnection.HTTP_OK],
- * stream url otherwise
+ * entry url if [stringUrl] host not myvi or if status code not [HttpURLConnection.HTTP_OK],
+ * valid url otherwise
  */
 @Suppress("UsePropertyAccessSyntax", "UnnecessaryVariable")
 fun handleMyviEmbeddedUrl(stringUrl: String): String {
