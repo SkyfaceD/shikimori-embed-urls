@@ -97,7 +97,7 @@ private fun extractVideoUrlFromRawHtml(rawHtml: String): String {
         ?.substringAfter("PlayerLoader.CreatePlayer(\"v=")
         ?.replaceAfterLast("\");", "")
         ?.split("(?=https)".toRegex())
-        ?.find { it.contains("stream") } ?: throw Exception("Can't find script")
+        ?.find { it.contains("stream") } ?: throw Exception("Can't find script or url")
     val url = URLDecoder.decode(stringUrl, "UTF-8")
     return url.substringBefore("\\u0026tp=", "")
 }
