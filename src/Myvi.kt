@@ -17,13 +17,17 @@ import javax.net.ssl.HttpsURLConnection
  * stream url otherwise
  */
 @Suppress("UsePropertyAccessSyntax", "UnnecessaryVariable")
-fun handleMyviEmbedUrl(stringUrl: String): String {
+fun handleMyviEmbeddedUrl(stringUrl: String): String {
     val url = URL(stringUrl)
-    if (!url.host.contains("myvi.tv")) return stringUrl
+    if (!url.host.contains("myvi")) return stringUrl
 
     val connection: HttpsURLConnection = (url.openConnection() as HttpsURLConnection).apply {
         setConnectTimeout(15_000)
         setReadTimeout(15_000)
+        addRequestProperty(
+            "User-Agent",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
+        )
         disconnect()
     }
 
@@ -32,7 +36,42 @@ fun handleMyviEmbedUrl(stringUrl: String): String {
 
     val rawHtml = connection.inputStream.use { readRawHtml(it) }
 
-    val videoUrl = extractVideoUrlFromRawHtml(rawHtml)
+    val extractedVideoUrl = extractVideoUrlFromRawHtml(rawHtml)
+
+    val videoUrl = handleMyviRedirect(extractedVideoUrl) ?: throw Exception("Can't redirect")
+
+    return videoUrl
+}
+
+/**
+ * Connect to passed [stringUrl] and return valid url if redirect found.
+ *
+ * @return
+ * entry url if [stringUrl] host not myvi or if status code [HttpURLConnection.HTTP_OK],
+ * null if location header not found or status code not [HttpURLConnection.HTTP_MOVED_TEMP],
+ * valid url otherwise
+ */
+@Suppress("UsePropertyAccessSyntax", "UnnecessaryVariable")
+fun handleMyviRedirect(stringUrl: String): String? {
+    val url = URL(stringUrl)
+    if (!url.host.contains("myvi")) return stringUrl
+
+    val connection: HttpsURLConnection = (url.openConnection() as HttpsURLConnection).apply {
+        setConnectTimeout(15_000)
+        setReadTimeout(15_000)
+        setInstanceFollowRedirects(false)
+        addRequestProperty(
+            "User-Agent",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
+        )
+        disconnect()
+    }
+
+    val responseCode = connection.responseCode
+    if (responseCode == HttpURLConnection.HTTP_OK) return stringUrl
+    if (responseCode != HttpURLConnection.HTTP_MOVED_TEMP) return null
+
+    val videoUrl = connection.getHeaderField("location")
 
     return videoUrl
 }
