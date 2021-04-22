@@ -2,5 +2,5 @@ Host|Status
 ---|---:
 sibnet.ru|`Done`
 myvi.tv|`Testing`
-myvi.top|`Work in progress`
+myvi.top|`Testing`
 sovetromantica.com|`Under consideration`
