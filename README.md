@@ -2,7 +2,7 @@ Host|Status|Issues
 :---|:---:|---:
 `sibnet.ru`|`Done`|`Not found`
 `myvi.tv/top`|`Done`|`Download links*`
-`sovetromantica.com/online`|`Under consideration`|`-`
+`sovetromantica.com/online`|`Work in progress`|`-`
 
 *From myvi host link can be extracted as downloadable, known issue for players:
 
