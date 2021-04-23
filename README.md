@@ -1,5 +1,5 @@
 Host|Status|Issues
----|:---:|---:
+:---|:---:|---:
 `sibnet.ru`|`Done`|`Not found`
 `myvi.tv/top`|`Done`|`Download links*`
 `sovetromantica.com/online`|`Under consideration`|`-`
