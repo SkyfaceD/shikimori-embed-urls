@@ -1,6 +1,5 @@
-Host|Status
----|---:
-sibnet.ru|`Done`
-myvi.tv|`Testing`
-myvi.top|`Testing`
-sovetromantica.com|`Under consideration`
+Host|Status|Errors
+---|:---:|---:
+`sibnet.ru`|`Done`|`-`
+`myvi.tv/top`|`Done`|`Download links`
+`sovetromantica.com/online`|`Under consideration`|`-`
