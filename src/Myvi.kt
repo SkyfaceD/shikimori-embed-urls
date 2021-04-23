@@ -35,7 +35,7 @@ fun handleMyviEmbeddedUrl(stringUrl: String): String {
     if (responseCode != HttpURLConnection.HTTP_OK) return stringUrl
 
     val rawHtml = connection.inputStream.use { readRawHtml(it) }
-    val extractedVideoUrl = extractVideoUrlFromRawHtml(rawHtml)
+    val extractedVideoUrl = extractVideoUrl(rawHtml)
     val videoUrl = handleMyviRedirect(extractedVideoUrl) ?: throw Exception("Can't redirect")
 
     return videoUrl
@@ -54,7 +54,7 @@ private fun readRawHtml(inputStream: InputStream): String {
     return sb.toString()
 }
 
-private fun extractVideoUrlFromRawHtml(rawHtml: String): String {
+private fun extractVideoUrl(rawHtml: String): String {
     val document = Jsoup.parseBodyFragment(rawHtml)
     val scripts = document.getElementsByTag("script")
     val stringUrl = scripts.map(Element::data)
