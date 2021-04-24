@@ -1,8 +1,5 @@
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLDecoder
@@ -41,19 +38,6 @@ fun handleMyviEmbeddedUrl(stringUrl: String): String {
     return videoUrl
 }
 
-private fun readRawHtml(inputStream: InputStream): String {
-    val reader = BufferedReader(InputStreamReader(inputStream))
-    val sb = StringBuilder()
-    reader.useLines { sequence ->
-        for (line in sequence.iterator()) {
-            if (line.isBlank()) continue
-            sb.append(line)
-        }
-    }
-    if (sb.isBlank()) throw Exception("Can't read html")
-    return sb.toString()
-}
-
 private fun extractVideoUrl(rawHtml: String): String {
     val document = Jsoup.parseBodyFragment(rawHtml)
     val scripts = document.getElementsByTag("script")
@@ -77,7 +61,7 @@ private fun extractVideoUrl(rawHtml: String): String {
  * valid url otherwise
  */
 @Suppress("UsePropertyAccessSyntax", "UnnecessaryVariable")
-fun handleMyviRedirect(stringUrl: String): String? {
+private fun handleMyviRedirect(stringUrl: String): String? {
     val url = URL(stringUrl)
 
     val connection: HttpsURLConnection = (url.openConnection() as HttpsURLConnection).apply {
