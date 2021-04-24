@@ -1,8 +1,8 @@
 Host|Status|Issues
 :---|:---:|---:
 `sibnet.ru`|`Done`|`Not found`
-`myvi.tv/top`|`Done`|`Download links*`
-`sovetromantica.com/online`|`Meh`|`SSLConnection?**`
+`myvi.tv/top`|`Done`|[`Download links*`](https://github.com/SkyfaceD/shikimori-embed-urls#from-myvi-host-link-can-be-extracted-as-downloadable-known-issue-for-players)
+`sovetromantica.com/online`|`Meh`|[`SSLConnection?**`](https://github.com/SkyfaceD/shikimori-embed-urls#i-really-dont-know-what-to-do-with-that-_%E3%83%84_)
 
 #### *From myvi host link can be extracted as downloadable, known issue for players:
 
